@@ -115,7 +115,7 @@
           linear-gradient(160deg, #fff7fb, #ffe3ed);
         border: 2px solid rgba(255, 255, 255, 0.7);
         border-radius: clamp(24px, 4vw, 40px);
-        padding: clamp(18px, 4vw, 34px);
+        padding: clamp(14px, 3.2vw, 26px);
         box-shadow:
           0 26px 46px rgba(0, 0, 0, 0.18),
           inset 0 4px 10px rgba(255, 255, 255, 0.45);
@@ -127,7 +127,7 @@
         display: grid;
         place-items: center;
         position: relative;
-        padding: 8px 0 4px;
+        padding: 4px 0 2px;
         touch-action: pan-y;
         user-select: none;
         z-index: 1;
@@ -135,8 +135,7 @@
 
       .polaroid-stack {
         position: relative;
-        width: min(84vw, 420px);
-        aspect-ratio: 4 / 5;
+        width: min(92vw, 520px);
       }
 
       .polaroid-stack::before,
@@ -167,7 +166,7 @@
         z-index: 1;
         background: #fff;
         border-radius: 18px;
-        padding: 18px 18px 22px;
+        padding: 8px 8px 12px;
         box-shadow:
           0 22px 36px rgba(0, 0, 0, 0.22),
           inset 0 1px 2px rgba(255, 255, 255, 0.8);
@@ -196,7 +195,7 @@
         position: relative;
         border-radius: 14px;
         overflow: hidden;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 3 / 4;
         background:
           radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.35), transparent 55%),
           linear-gradient(135deg, #f8dbe3, #e9a8ba);
@@ -209,13 +208,14 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
+        object-position: center;
         display: block;
         background: #f7f1f4;
       }
 
       .polaroid-text {
-        margin-top: 14px;
-        min-height: 70px;
+        margin-top: 6px;
+        min-height: 44px;
       }
 
       .polaroid-text h2 {
@@ -339,20 +339,16 @@
       .spotify {
         background: rgba(255, 255, 255, 0.94);
         border-radius: var(--radius);
-        padding: 12px;
+        padding: 6px 8px;
         box-shadow: 0 12px 22px rgba(0, 0, 0, 0.16);
         display: grid;
-        gap: 6px;
-      }
-
-      .spotify h2 {
-        margin: 0;
-        font-size: clamp(1rem, 3vw, 1.3rem);
+        gap: 2px;
+        position: relative;
       }
 
       .spotify p {
-        margin: 0 0 6px;
-        font-size: clamp(0.85rem, 2.4vw, 1rem);
+        margin: 0;
+        font-size: clamp(0.78rem, 2.3vw, 0.95rem);
         opacity: 0.8;
       }
 
@@ -360,7 +356,12 @@
         width: 100%;
         border: 0;
         border-radius: 12px;
-        height: 152px;
+        height: 90px;
+      }
+
+      .ghost {
+        background: #fff;
+        color: #6b0f2c;
       }
 
       .overlay {
@@ -467,11 +468,11 @@
       @media (min-width: 900px) {
         .viewer {
           grid-template-columns: minmax(0, 1fr);
-          padding: clamp(22px, 3vw, 36px);
+          padding: clamp(18px, 2.6vw, 30px);
         }
 
         .polaroid-area { margin-top: -6px; }
-        .polaroid-stack { width: min(420px, 60vw); }
+        .polaroid-stack { width: min(560px, 68vw); }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -489,6 +490,21 @@
         <h1>Valentine Polaroids</h1>
         <p>Swipe, click next, or use arrow keys to flip through the stack.</p>
       </header>
+
+      <section class="spotify" aria-label="Background song">
+        <p>Press play to hear the song as you read my story to you Mrs. Sandoval!</p>
+        <iframe
+          data-testid="embed-iframe"
+          style="border-radius:12px"
+          src="https://open.spotify.com/embed/track/4KrXsgZHi1yLZLB1Wlgcbt?utm_source=generator&theme=0"
+          width="100%"
+          height="90"
+          frameborder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+      </section>
 
       <section class="viewer" aria-label="Valentine polaroid stack">
         <div class="polaroid-area" id="swipeArea">
@@ -527,8 +543,7 @@
 
         <div class="overlay" id="startOverlay">
           <div class="overlay__card">
-            <h2>Start the stack</h2>
-            <p>Tap to load the polaroids and start the Valentine story.</p>
+            <h2>Tap to load my story for you Mrs. Sandoval</h2>
             <button id="startBtn">Start</button>
           </div>
         </div>
@@ -545,23 +560,6 @@
             </div>
           </div>
         </div>
-      </section>
-
-      <section class="spotify" aria-label="Background song">
-        <h2>Background song</h2>
-        <p>Tap play to start (Hopefully this is one of your favorite Banda Songs).</p>
-        <!-- Note: Spotify embeds require a connection and user interaction to start playback. -->
-        <iframe
-          data-testid="embed-iframe"
-          src="https://open.spotify.com/embed/track/3EjuEvxoNgHV6urIdPA4cl?utm_source=generator"
-          width="100%"
-          height="152"
-          frameborder="0"
-          allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-          title="Spotify player: track 3EjuEvxoNgHV6urIdPA4cl"
-        ></iframe>
       </section>
 
     </main>
@@ -694,7 +692,7 @@
         const updateCaption = () => {
           if (currentIndex < 0) {
             elements.captionHeadline.textContent = "Start the stack";
-            elements.captionMessage.textContent = "Tap \"Start\" to begin the show.";
+            elements.captionMessage.textContent = "Tap \"Start\" to load the stack.";
             elements.progress.textContent = `0 / ${frames.length}`;
             return;
           }
@@ -720,6 +718,7 @@
         };
 
         const showOverlay = (overlayEl, show) => {
+          if (!overlayEl) return;
           if (show) {
             overlayEl.removeAttribute("hidden");
           } else {
